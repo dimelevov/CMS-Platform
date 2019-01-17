@@ -1,25 +1,27 @@
 <?php
+require_once("../includes/db.php");
+
 function confirmQuery($result) {
     global $connection;
-    if(!$result) {
+    if (!$result) {
         die("QUERY FAILED" . mysqli_error($connection));
     }
 }
 
 function insert_categories() {
     global $connection;
-    if(isset($_POST['submit'])) {
+    if (isset($_POST['submit'])) {
         $cat_title = $_POST['cat_title'];
 
-        if($cat_title == "" || empty($cat_title)) {
+        if ($cat_title == "" || empty($cat_title)) {
             echo '<div class="alert alert-danger" role="alert">This field should not be empty!</div>';
         } else {
-            $query = "INSERT INTO categories(cat_title) ";
-            $query .= "VALUE('{$cat_title}') ";
+            $query = "INSERT INTO categories(cat_title)";
+            $query .= " VALUE('{$cat_title}')";
 
             $create_category_query = mysqli_query($connection, $query);
 
-            if(!$create_category_query) {
+            if (!$create_category_query) {
                 die('QUERY FAILED' . mysqli_error($connection));
             }
         }
@@ -31,7 +33,7 @@ function findAllCategories() {
     $query = "SELECT * FROM categories";
     $select_categoties = mysqli_query($connection, $query);
 
-    while($row = mysqli_fetch_assoc($select_categoties)) {
+    while ($row = mysqli_fetch_assoc($select_categoties)) {
         $cat_id = $row['cat_id'];
         $cat_title = $row['cat_title'];
         echo "<tr>";
@@ -43,19 +45,15 @@ function findAllCategories() {
      } 
 }
 
-function deleteCategories() {
+function deleteCategories($catId = null) {
     global $connection;
-    if(isset($_GET['delete'])) {
-        $the_cat_id = $_GET['delete'];
-
-        $query = "DELETE FROM categories WHERE cat_id = {$the_cat_id} ";
+    if (!isset($catId) && isset($_GET['delete'])) {
+        $catId = $_GET['delete'];
+    }
+    
+    if (isset($catId)) {
+        $query = "DELETE FROM categories WHERE cat_id = {$catId}";
         $delete_categories = mysqli_query($connection, $query);
         header("Location: categories.php");
     }  
 }
-
-
-
-
-
-

@@ -15,11 +15,15 @@
             
             
             <?php
-            $has_posts = false;
-            $query = "SELECT * FROM posts";
+            
+            if (isset($_GET['category'])) {
+                $post_category_id = $_GET['category'];
+            }
+            
+            $query = "SELECT * FROM posts WHERE post_category_id = $post_category_id";
             $select_all_posts_query = mysqli_query($connection, $query);
                 
-            while($row = mysqli_fetch_assoc($select_all_posts_query)) {
+            while($row = mysqli_fetch_assoc($select_all_posts_query)){
                 $post_id = $row['post_id'];
                 $post_title = $row['post_title'];
                 $post_author = $row['post_author'];
@@ -29,13 +33,9 @@
                 $post_content = $row['post_content'];
                 if (strlen($post_content) > 150) {
                     $cutString = substr($post_content, 0, 150) . "...";
-                } else {
+                    } else {
                     $citString = $post_content;
                 }
-                $post_status = $row['post_status'];
-                
-                if ($post_status == 'published') {
-                    $has_posts = true;
                 ?>
                 
             <h1 class="page-header">
@@ -61,14 +61,7 @@
 
             <hr> 
                 
-            <?php 
-                }
-            } 
-            if ($has_posts == false) {
-                echo "<h2 class='text-center'>No Posts Published, Sorry</h2>";
-            }
-            
-            ?>
+            <?php } ?>
 
             
 

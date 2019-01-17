@@ -48,6 +48,8 @@
                 echo "<td>{$post_tag}</td>";
                 echo "<td>{$post_comment_count}</td>";
                 echo "<td>{$newPostDate}</td>";
+                echo "<td><a href='posts.php?draft={$post_id}'>Draft</a></td>";
+                echo "<td><a href='posts.php?publish={$post_id}'>Publish</a></td>";
                 echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
                 echo "<td><a href='posts.php?delete={$post_id}'>Delete</a></td>";
                 echo "</tr>";
@@ -57,6 +59,20 @@
 </table>
 
 <?php
+if(isset($_GET['draft'])) {
+    $draft_post_id = $_GET['draft'];
+    
+    $query = "UPDATE posts SET post_status = 'draft' WHERE post_id = {$draft_post_id}";
+    $move_to_draft = mysqli_query($connection, $query);
+    header ('Location: posts.php'); 
+}
+if(isset($_GET['publish'])) {
+    $publish_post_id = $_GET['publish'];
+    
+    $query = "UPDATE posts SET post_status = 'published' WHERE post_id = {$publish_post_id}";
+    $publish_post = mysqli_query($connection, $query);
+    header ('Location: posts.php'); 
+}
 if(isset($_GET['delete'])) {
     $deletePostsId = $_GET['delete'];
     
