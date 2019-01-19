@@ -21,14 +21,14 @@
     }
 
     if (isset($_POST['update_post'])) {
-        $post_author = $_POST['post_author'];
-        $post_title = $_POST['post_title'];
-        $post_category_id = $_POST['post_category'];
-        $post_status = $_POST['post_status'];
+        $post_author = mysqli_real_escape_string($connection, $_POST['post_author']);
+        $post_title = mysqli_real_escape_string($connection, $_POST['post_title']);
+        $post_category_id = mysqli_real_escape_string($connection, $_POST['post_category']);
+        $post_status = mysqli_real_escape_string($connection, $_POST['post_status']);
         $post_image = $_FILES['image']['name'];
         $post_image_temp = $_FILES['image']['tmp_name'];
-        $post_content = $_POST['post_content'];
-        $post_tag = $_POST['post_tag'];
+        $post_content = mysqli_real_escape_string($connection, $_POST['post_content']);
+        $post_tag = mysqli_real_escape_string($connection, $_POST['post_tag']);
 
     
     move_uploaded_file($post_image_temp, "../images/$post_image");
