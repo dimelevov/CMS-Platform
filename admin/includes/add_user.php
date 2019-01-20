@@ -2,6 +2,7 @@
 if(isset($_POST['create_user'])) {
     $username = mysqli_real_escape_string($connection, $_POST['username']);
     $user_password = mysqli_real_escape_string($connection, $_POST['user_password']);
+    $user_password_hash = md5($user_password);
     $user_firstname = mysqli_real_escape_string($connection, $_POST['user_firstname']);
     $user_lastname = mysqli_real_escape_string($connection, $_POST['user_lastname']);
     $user_image = $_FILES['image']['name'];
@@ -14,7 +15,7 @@ if(isset($_POST['create_user'])) {
     
     $query = "INSERT INTO users(username, user_password, user_firstname, user_lastname, user_email, user_role, user_create_at, user_image)";
     
-    $query .= " VALUE('{$username}', '{$user_password}', '{$user_firstname}', '{$user_lastname}', '{$user_email}', '$user_role', '{$user_create_at}', '$user_image')";
+    $query .= " VALUE('{$username}', '{$user_password_hash}', '{$user_firstname}', '{$user_lastname}', '{$user_email}', '$user_role', '{$user_create_at}', '$user_image')";
     
     $create_user_query = mysqli_query($connection, $query);
     

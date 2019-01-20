@@ -1,4 +1,17 @@
+<?php include_once ("./function.php"); ?>
 <?php ob_start(); ?>
+<?php session_start(); ?>
+
+<?php 
+if (!isset($_SESSION['user_role'])) {   
+    header("Location: ../index.php");
+} else if (isset($_SESSION['user_role'])) {
+    if ($_SESSION['user_role'] !== 'admin') {
+        $_SESSION['error_login'] = "You don't have a permission to access!";  
+        header("Location: ../index.php");
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">

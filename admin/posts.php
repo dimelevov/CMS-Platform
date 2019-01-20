@@ -1,5 +1,5 @@
-<?php include "includes/admin_header.php"; ?>
-<?php include "function.php"; ?>
+<?php include_once ("includes/admin_header.php"); ?>
+
 
 <div id="wrapper">
 

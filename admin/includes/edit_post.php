@@ -54,11 +54,13 @@
     $query .="post_image = '{$post_image}' ";
     $query .= "WHERE post_id = {$p_id} ";
     
-    $update_post = mysqli_query($connection, $query);
-//    confirmQuery($update_post);
-    if(!$update_post) {
-                  die("QUERY FAILED" . mysqli_error($connection));
-              }
+    $update_post_query = mysqli_query($connection, $query);
+        
+    if(!$update_post_query) {
+        die("QUERY FAILED" . mysqli_error($connection));
+    } else {
+        echo '<div class="alert alert-info" role="alert">Post updated.</div>';
+    }
 }
 
 ?>

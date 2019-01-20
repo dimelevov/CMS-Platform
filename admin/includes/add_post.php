@@ -19,7 +19,11 @@ if(isset($_POST['create_post'])) {
     
     $create_post_query = mysqli_query($connection, $query);
     
-    //confirmQuery($create_post_query);
+    if (!$create_post_query) {
+        die("QUERY FAILED" . mysqli_error($connection));
+    } else {
+        echo '<div class="alert alert-success" role="alert">Post created.</div>';
+    }
 }
 
 ?>

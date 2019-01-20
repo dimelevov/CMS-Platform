@@ -1,9 +1,11 @@
 <!-- Connection -->
-<?php include "includes/db.php"; ?>
+<?php include_once ("includes/db.php"); ?>
 <!-- Header -->
-<?php include "includes/header.php"; ?>
+<?php include_once ("includes/header.php"); ?>
 <!-- Navigation -->
-<?php include "includes/navigation.php"; ?>
+<?php include_once ("includes/navigation.php"); ?>
+
+<?php session_start(); ?>
 
 <!-- Page Content -->
 <div class="container">
@@ -12,7 +14,17 @@
 
         <!-- Blog Entries Column -->
         <div class="col-md-8">
+            <?php
+            if (isset($_SESSION['error_mes'])) {
+                echo '<div class="alert alert-danger" role="alert">' . $_SESSION['error_mes'] . '</div>';
+                unset($_SESSION['error_mes']);
+            }
             
+            if (isset($_SESSION['error_login'])) {
+                echo '<div class="alert alert-warning" role="alert">' . $_SESSION['error_login'] . '</div>';
+                unset($_SESSION['error_login']); 
+            }
+            ?>
             
             <?php
             $has_posts = false;
