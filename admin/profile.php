@@ -92,8 +92,8 @@ if (isset($_POST['update_user'])) {
                         echo '<div class="alert alert-info" role="alert">' . $updated_user_message . '</div>';
                     }
                     ?>
-                    <h1 class="page-header text-center">Welcome to admin <small>Author</small></h1>
-                    <h1 class="text-center">Edit User</h1>
+                    <h1 class="text-center">Edit Profile</h1>
+                    <hr>
                     <form action="" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="user_firstname">Firstname</label>

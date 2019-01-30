@@ -1,3 +1,5 @@
+<h1 class="text-center">All Comments</h1>
+<hr>
 <table class="table table-bordered table-hover">
     <thead>
         <tr>

@@ -11,10 +11,8 @@
             <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">
-                        Welcome to admin
-                        <small>Author</small>
-                    </h1>
+                    <h1 class="text-center">All Categories</h1>
+                    <hr>
                     <div class="col-xs-6">
                     <?php insert_categories(); ?>
                         <form action="" method="post">

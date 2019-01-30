@@ -1,3 +1,5 @@
+<h1 class="text-center">All Users</h1>
+<hr>
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -76,12 +78,12 @@ if(isset($_GET['delete'])) {
     
     $query = "DELETE FROM users WHERE user_id = {$the_user_id}";
     $delete_user_query = mysqli_query($connection, $query);
-//    if (!$delete_user_query) {
-//        die("QUERY FAILED" . mysqli_error($connection));
-//    } else {
-//        echo '<div class="alert alert-danger" role="alert">User deleted.</div>';
-//    }
-    header ('Location: users.php'); 
+    if (!$delete_user_query) {
+        die("QUERY FAILED" . mysqli_error($connection));
+    } else {
+        $_SESSION['delete_user_message'] = "User deleted.";
+        header ('Location: users.php'); 
+    }
 }
 
 ?>

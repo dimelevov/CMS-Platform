@@ -12,7 +12,12 @@
             <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header text-center">Welcome to admin <small>Author</small></h1>
+                    <?php
+                        if (isset($_SESSION['delete_user_message'])) {
+                            echo '<div class="alert alert-danger" role="alert">' . $_SESSION['delete_user_message'] . '</div>';
+                            unset($_SESSION['delete_user_message']);
+                        }
+                    ?>
                     <?php 
                     
                     if(isset($_GET['source'])) {

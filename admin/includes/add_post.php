@@ -22,13 +22,14 @@ if(isset($_POST['create_post'])) {
     if (!$create_post_query) {
         die("QUERY FAILED" . mysqli_error($connection));
     } else {
-        echo '<div class="alert alert-success" role="alert">Post created.</div>';
+        $the_post_id = mysqli_insert_id($connection);
+        echo "<div class='alert alert-success text-center' role='alert'>Post created. <a href='../post.php?p_id={$the_post_id}'>View Post</a></div>";
     }
 }
 
 ?>
-   
-
+<h1 class="text-center">Add New Post</h1>
+<hr>
 <form action="" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="title">Post Title</label>
@@ -56,8 +57,12 @@ if(isset($_POST['create_post'])) {
         <input type="text" class="form-control" name="author">
     </div>
     <div class="form-group">
-        <label for="post_status">Post Status</label>
-        <input type="text" class="form-control" name="post_status">
+        <label for="post_status">Post Status</label><br>
+        <select name="post_status" id="">
+            <option value="draft">Select Options</option>
+            <option value="draft">Draft</option>
+            <option value="published">Published</option>
+        </select>
     </div>
     <div class="form-group">
         <label for="post_image">Post Image</label>
@@ -69,7 +74,7 @@ if(isset($_POST['create_post'])) {
     </div>
     <div class="form-group">
         <label for="post_content">Post Content</label>
-        <textarea name="post_content" id="" cols="30" rows="10" class="form-control"></textarea>
+        <textarea name="post_content" id="body" cols="30" rows="10" class="form-control"></textarea>
     </div>
     <div class="form group">
         <input type="submit" class="btn btn-primary" name="create_post" value="Publish Post">

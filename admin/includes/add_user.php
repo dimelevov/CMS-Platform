@@ -22,13 +22,14 @@ if(isset($_POST['create_user'])) {
     if (!$create_user_query) {
         die("QUERY FAILED" . mysqli_error($connection));
     } else {
-        echo '<div class="alert alert-success" role="alert">User created.</div>';
+        echo '<div class="alert alert-success text-center" role="alert">User created.</div>';
     }
 }
 
 ?>
    
-
+<h1 class="text-center">Add New User</h1>
+<hr>
 <form action="" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="user_firstname">Firstname</label>

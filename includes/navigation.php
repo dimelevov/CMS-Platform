@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -13,7 +14,6 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-            
                 <?php 
                     $query = "SELECT * FROM categories";
                     $select_all_categoties_query = mysqli_query($connection, $query);
@@ -23,19 +23,20 @@
                         echo "<li><a href='#'>{$cat_title}</a></li>";
                     }
                 ?>
-            
-            
                 <li>
                     <a href="admin">Admin</a>
                 </li>
-<!--
                 <li>
-                    <a href="#">Services</a>
+                    <a href="registration.php">Registration</a>
                 </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
--->
+                <?php
+                    if (isset($_SESSION['user_role'])) {
+                        if (isset($_GET['p_id'])) {
+                            $the_post_id = $_GET['p_id'];
+                            echo "<li><a href='admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
+                        }
+                    }
+                ?>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

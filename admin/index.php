@@ -132,6 +132,10 @@
                 </div>
                 <!-- /.row -->
                 <?php 
+                    $query = "SELECT * FROM posts WHERE post_status = 'published'";
+                    $select_all_published_posts_query = mysqli_query($connection, $query);
+                    $publish_posts_counts = mysqli_num_rows($select_all_published_posts_query);
+                                                
                     $query = "SELECT * FROM posts WHERE post_status = 'draft'";
                     $select_all_draft_posts_query = mysqli_query($connection, $query);
                     $draft_posts_counts = mysqli_num_rows($select_all_draft_posts_query);
@@ -154,10 +158,10 @@
                         var data = google.visualization.arrayToDataTable([
                             ['Data', 'Count'],
                             <?php
-                            $element_text = ['Active Post', 'Draft Post', 'Comments', 'Pending Comments', 'Users', 'Subsbribers', 'Categories'];
-                            $element_count = [$post_counts, $draft_posts_counts, $comment_counts, $unapproved_comm_counts, $users_counts, $subscribers_users_counts, $categories_counts];
+                            $element_text = ['All Posts', 'Active Post', 'Draft Post', 'Comments', 'Pending Comments', 'Users', 'Subsbribers', 'Categories'];
+                            $element_count = [$post_counts, $publish_posts_counts, $draft_posts_counts, $comment_counts, $unapproved_comm_counts, $users_counts, $subscribers_users_counts, $categories_counts];
                                         
-                            for ($i=0; $i<7; $i++) {
+                            for ($i=0; $i<8; $i++) {
                                 echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}],";
                             }
                             ?>
@@ -183,4 +187,4 @@
         </div>
         <!-- /#page-wrapper -->
 
-    <?php include "includes/Admin_footer.php"; ?>
+    <?php include_once "includes/admin_footer.php"; ?>

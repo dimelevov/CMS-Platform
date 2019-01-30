@@ -59,7 +59,7 @@
     if(!$update_post_query) {
         die("QUERY FAILED" . mysqli_error($connection));
     } else {
-        echo '<div class="alert alert-info" role="alert">Post updated.</div>';
+        echo "<div class='alert alert-info text-center' role='alert'>Post updated. <a href='../post.php?p_id={$p_id}'>View Post</a></div>";
     }
 }
 
@@ -94,8 +94,17 @@
         <input type="text" value="<?php if(isset($post_author)) {echo $post_author;} ?>" class="form-control" name="post_author">
     </div>
     <div class="form-group">
-        <label for="post_status">Post Status</label>
-        <input type="text" value="<?php if(isset($post_status)) {echo $post_status;} ?>" class="form-control" name="post_status">
+        <label for="post_status">Post Status</label><br>
+        <select name="post_status" id="">
+            <option value='<?php echo $post_status; ?>'><?php echo $post_status; ?></option>
+            <?php 
+                if ($post_status == 'published') {
+                    echo "<option value='draft'>draft</option>";
+                } else {
+                    echo "<option value='published'>publish</option>";
+                }
+            ?>
+        </select>
     </div>
     <div class="form-group">
         <label for="post_image">Post Image</label><br>
@@ -108,7 +117,7 @@
     </div>
     <div class="form-group">
         <label for="post_content">Post Content</label>
-        <textarea name="post_content" id="" cols="30" rows="10" class="form-control"><?php if(isset($post_content)) {echo $post_content;} ?>
+        <textarea name="post_content" id="body" cols="30" rows="10" class="form-control"><?php if(isset($post_content)) {echo $post_content;} ?>
         </textarea>
     </div>
     <div class="form group">

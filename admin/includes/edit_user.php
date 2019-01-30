@@ -15,7 +15,6 @@ while ($row = mysqli_fetch_assoc($select_user_by_id)) {
     $user_email = $row['user_email'];
     $user_image = $row['user_image'];
     $user_role = $row['user_role'];
-    $randSalt = $row['randSalt'];
 }
 
 if (isset($_POST['update_user'])) {
@@ -41,7 +40,7 @@ if (isset($_POST['update_user'])) {
     } 
 
     if ($no_error == false) {
-        echo '<div class="alert alert-danger" role="alert">' . $error_message . '</div>';
+        echo '<div class="alert alert-danger text-center" role="alert">' . $error_message . '</div>';
     } else {
         $user_password_hash = md5($new_user_password);
 
@@ -71,7 +70,7 @@ if (isset($_POST['update_user'])) {
         if (!$update_user_query) {
             die("QUERY FAILED" . mysqli_error($connection));
         } else {
-            echo '<div class="alert alert-info" role="alert">User updated.</div>';
+            echo '<div class="alert alert-info text-center" role="alert">User updated.</div>';
         }
     }
 }
@@ -90,7 +89,7 @@ if (isset($_POST['update_user'])) {
         <div class="form-group">
             <label for="user_role">User Role</label><br>
             <select name="user_role" id="">
-                <option value="subscriber"><?php echo $user_role; ?></option>
+                <option value="<?php echo $user_role; ?>"><?php echo $user_role; ?></option>
                 <?php
                 if ($user_role == 'admin') {
                     echo '<option value="subscriber">subscriber</option>';
